@@ -1,11 +1,14 @@
 package med.voll.api.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public record PersonalAddressDTO(
-        String street,
-        String number,
+        @NotBlank String street,
+        @NotBlank String number,
         String complement,
-        String neighborhood,
-        String city,
-        String uf,
-        String cep
+        @NotBlank String neighborhood,
+        @NotBlank String city,
+        @NotBlank String uf,
+        @NotBlank @Pattern(regexp = "\\d{8}") String cep
 ) {}
