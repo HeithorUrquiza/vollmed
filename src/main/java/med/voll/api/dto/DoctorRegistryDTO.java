@@ -6,10 +6,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public record PatientDTO(
+public record DoctorRegistryDTO(
         @NotBlank String name,
         @NotBlank @Email String email,
         @NotBlank String cellphone,
-        @NotBlank @Pattern(regexp = "\\d{11}") String cpf,
+        @NotBlank @Pattern(regexp = "\\d{4,6}") String crm,
+        @NotNull SpeciallityDTO speciality,
         @NotNull @Valid PersonalAddressDTO personalAddress
 ) {}

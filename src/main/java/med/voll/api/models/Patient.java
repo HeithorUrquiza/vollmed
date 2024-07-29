@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import med.voll.api.dto.PatientDTO;
+import med.voll.api.dto.PatientRegistryDTO;
 
 @Entity
 @Table(name= "patients")
@@ -24,11 +24,11 @@ public class Patient {
     @Embedded
     private PersonalAddress personalAddress;
 
-    public Patient(PatientDTO patientDTO) {
-        this.name = patientDTO.name();
-        this.email = patientDTO.email();
-        this.cellphone = patientDTO.cellphone();
-        this.cpf = patientDTO.cpf();
-        this.personalAddress = new PersonalAddress(patientDTO.personalAddress());
+    public Patient(PatientRegistryDTO patientRegistryDTO) {
+        this.name = patientRegistryDTO.name();
+        this.email = patientRegistryDTO.email();
+        this.cellphone = patientRegistryDTO.cellphone();
+        this.cpf = patientRegistryDTO.cpf();
+        this.personalAddress = new PersonalAddress(patientRegistryDTO.personalAddress());
     }
 }

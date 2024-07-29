@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import med.voll.api.dto.DoctorDTO;
+import med.voll.api.dto.DoctorRegistryDTO;
 import med.voll.api.dto.SpeciallityDTO;
 
 @Entity
@@ -31,12 +31,12 @@ public class Doctor {
     @Embedded
     private PersonalAddress personalAddress;
 
-    public Doctor(DoctorDTO doctorDTO) {
-        this.name = doctorDTO.name();
-        this.email = doctorDTO.email();
-        this.cellphone = doctorDTO.cellphone();
-        this.crm = doctorDTO.crm();
-        this.speciality = doctorDTO.speciality();
-        this.personalAddress = new PersonalAddress(doctorDTO.personalAddress());
+    public Doctor(DoctorRegistryDTO doctorRegistryDTO) {
+        this.name = doctorRegistryDTO.name();
+        this.email = doctorRegistryDTO.email();
+        this.cellphone = doctorRegistryDTO.cellphone();
+        this.crm = doctorRegistryDTO.crm();
+        this.speciality = doctorRegistryDTO.speciality();
+        this.personalAddress = new PersonalAddress(doctorRegistryDTO.personalAddress());
     }
 }
