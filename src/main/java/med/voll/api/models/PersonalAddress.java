@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import med.voll.api.dto.PersonalAddressDTO;
 
+import java.util.Optional;
+
 @Embeddable
 @Getter
 @Setter
@@ -27,5 +29,15 @@ public class PersonalAddress {
         this.city = personalAddressDTO.city();
         this.uf = personalAddressDTO.uf();
         this.cep = personalAddressDTO.cep();
+    }
+
+    public void updateInfos(PersonalAddressDTO personalAddress) {
+        Optional.ofNullable(personalAddress.street()).ifPresent(this::setStreet);
+        Optional.ofNullable(personalAddress.number()).ifPresent(this::setNumber);
+        Optional.ofNullable(personalAddress.complement()).ifPresent(this::setComplement);
+        Optional.ofNullable(personalAddress.neighborhood()).ifPresent(this::setNeighborhood);
+        Optional.ofNullable(personalAddress.city()).ifPresent(this::setCity);
+        Optional.ofNullable(personalAddress.uf()).ifPresent(this::setUf);
+        Optional.ofNullable(personalAddress.cep()).ifPresent(this::setCep);
     }
 }

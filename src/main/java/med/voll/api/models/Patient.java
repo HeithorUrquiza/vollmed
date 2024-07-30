@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import med.voll.api.dto.PatientRegistryDTO;
+import med.voll.api.dto.PatientUpdateDTO;
+
+import java.util.Optional;
 
 @Entity
 @Table(name= "patients")
@@ -30,5 +33,12 @@ public class Patient {
         this.cellphone = patientRegistryDTO.cellphone();
         this.cpf = patientRegistryDTO.cpf();
         this.personalAddress = new PersonalAddress(patientRegistryDTO.personalAddress());
+    }
+
+    public void updateInfos(PatientUpdateDTO patientUpdateDTO) {
+        Optional.ofNullable(patientUpdateDTO.name()).ifPresent(this::setName);
+        Optional.ofNullable(patientUpdateDTO.cellphone()).ifPresent(this::setCellphone);
+        Optional.ofNullable(patientUpdateDTO.personalAddress()).ifPresent(personalAddressDTO ->
+                this.personalAddress.updateInfos(personalAddressDTO));
     }
 }

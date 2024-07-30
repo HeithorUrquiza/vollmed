@@ -2,6 +2,7 @@ package med.voll.api.services;
 
 import med.voll.api.dto.DoctorRecoverDTO;
 import med.voll.api.dto.DoctorRegistryDTO;
+import med.voll.api.dto.DoctorUpdateDTO;
 import med.voll.api.models.Doctor;
 import med.voll.api.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class DoctorService {
 //    This method controlls the pagination (type, quantity and number)
     public Page<DoctorRecoverDTO> getAllDoctors(@PageableDefault(size=10, sort = {"name", "desc"}) Pageable pagination) {
         return this.doctorRepository.findAll(pagination).map(DoctorRecoverDTO::new);
+    }
+
+    public void updateDoctor(DoctorUpdateDTO doctorUpdateDTO) {
+        Doctor doctorDB = this.doctorRepository.getReferenceById(doctorUpdateDTO.id());
+        doctorDB.updateInfos(doctorUpdateDTO);
     }
 }
