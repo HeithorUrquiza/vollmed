@@ -22,11 +22,16 @@ public class DoctorService {
 
 //    This method controlls the pagination (type, quantity and number)
     public Page<DoctorRecoverDTO> getAllDoctors(@PageableDefault(size=10, sort = {"name", "desc"}) Pageable pagination) {
-        return this.doctorRepository.findAll(pagination).map(DoctorRecoverDTO::new);
+        return this.doctorRepository.findAllByActiveTrue(pagination).map(DoctorRecoverDTO::new);
     }
 
     public void updateDoctor(DoctorUpdateDTO doctorUpdateDTO) {
         Doctor doctorDB = this.doctorRepository.getReferenceById(doctorUpdateDTO.id());
         doctorDB.updateInfos(doctorUpdateDTO);
+    }
+
+    public void deleteDoctor(Long id) {
+        Doctor doctorDB = this.doctorRepository.getReferenceById(id);
+        doctorDB.setActive(false);
     }
 }

@@ -33,6 +33,7 @@ public class Doctor {
     private SpeciallityDTO speciality;
     @Embedded
     private PersonalAddress personalAddress;
+    private Boolean active;
 
     public Doctor(DoctorRegistryDTO doctorRegistryDTO) {
         this.name = doctorRegistryDTO.name();

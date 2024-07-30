@@ -35,4 +35,11 @@ public class DoctorController {
         this.doctorService.updateDoctor(doctorUpdateDTO);
         return "Doctor updated";
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public String deleteDoctor(@PathVariable Long id) {
+        this.doctorService.deleteDoctor(id);
+        return "Doctor deleted";
+    }
 }

@@ -35,4 +35,11 @@ public class PatientController {
         this.patientService.updatePatient(patientUpdateDTO);
         return "Patient updated";
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public String deletePatient(@PathVariable Long id) {
+        this.patientService.deletePatient(id);
+        return "Patient deleted";
+    }
 }

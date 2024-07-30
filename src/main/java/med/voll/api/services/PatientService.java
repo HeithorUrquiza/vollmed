@@ -22,11 +22,16 @@ public class PatientService {
     }
 
     public Page<PatientRecoverDTO> getAllPatients(@PageableDefault(size=10, sort = {"name", "desc"}) Pageable pagination) {
-        return this.patientRepository.findAll(pagination).map(PatientRecoverDTO::new);
+        return this.patientRepository.findAllByActiveTrue(pagination).map(PatientRecoverDTO::new);
     }
 
     public void updatePatient(PatientUpdateDTO patientUpdateDTO) {
         Patient patientDB = this.patientRepository.getReferenceById(patientUpdateDTO.id());
         patientDB.updateInfos(patientUpdateDTO);
+    }
+
+    public void deletePatient(Long id) {
+        Patient patientDB = this.patientRepository.getReferenceById(id);
+        patientDB.setActive(false);
     }
 }

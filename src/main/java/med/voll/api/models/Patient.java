@@ -26,6 +26,7 @@ public class Patient {
     private String cpf;
     @Embedded
     private PersonalAddress personalAddress;
+    private Boolean active;
 
     public Patient(PatientRegistryDTO patientRegistryDTO) {
         this.name = patientRegistryDTO.name();
