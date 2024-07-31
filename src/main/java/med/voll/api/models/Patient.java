@@ -5,8 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import med.voll.api.dto.PatientRegistryDTO;
-import med.voll.api.dto.PatientUpdateDTO;
+import med.voll.api.dto.patient.PatientRegistryDTO;
+import med.voll.api.dto.patient.PatientUpdateDTO;
 
 import java.util.Optional;
 

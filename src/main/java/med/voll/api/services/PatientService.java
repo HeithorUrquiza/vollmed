@@ -1,9 +1,8 @@
 package med.voll.api.services;
 
-import med.voll.api.dto.DoctorRecoverDTO;
-import med.voll.api.dto.PatientRecoverDTO;
-import med.voll.api.dto.PatientRegistryDTO;
-import med.voll.api.dto.PatientUpdateDTO;
+import med.voll.api.dto.patient.PatientRecoverDTO;
+import med.voll.api.dto.patient.PatientRegistryDTO;
+import med.voll.api.dto.patient.PatientUpdateDTO;
 import med.voll.api.models.Patient;
 import med.voll.api.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
-package med.voll.api.dto;
+package med.voll.api.dto.doctor;
 
+import med.voll.api.dto.SpeciallityDTO;
 import med.voll.api.models.Doctor;
 
 public record DoctorRecoverDTO(

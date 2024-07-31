@@ -5,8 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import med.voll.api.dto.DoctorRegistryDTO;
-import med.voll.api.dto.DoctorUpdateDTO;
+import med.voll.api.dto.doctor.DoctorRegistryDTO;
+import med.voll.api.dto.doctor.DoctorUpdateDTO;
 import med.voll.api.dto.SpeciallityDTO;
 
 import java.util.Optional;
@@ -41,6 +41,7 @@ public class Doctor {
         this.cellphone = doctorRegistryDTO.cellphone();
         this.crm = doctorRegistryDTO.crm();
         this.speciality = doctorRegistryDTO.speciality();
+        this.active = true;
         this.personalAddress = new PersonalAddress(doctorRegistryDTO.personalAddress());
     }
 
