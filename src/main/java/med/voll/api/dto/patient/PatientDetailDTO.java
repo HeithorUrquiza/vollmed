@@ -1,10 +1,18 @@
 package med.voll.api.dto.patient;
 
-public record PatientDetailDTO() {
-}
+import med.voll.api.models.Patient;
+import med.voll.api.models.PersonalAddress;
 
-//public record DadosDetalhamentoPaciente(String nome, String email, String telefone, String cpf, Endereco endereco) {
-//    public DadosDetalhamentoPaciente(Paciente paciente) {
-//        this(paciente.getNome(), paciente.getEmail(), paciente.getTelefone(), paciente.getCpf(), paciente.getEndereco());
-//    }
-//}
+public record PatientDetailDTO(
+        Long id,
+        String name,
+        String email,
+        String cellphone,
+        String cpf,
+        PersonalAddress personalAddress
+) {
+    public PatientDetailDTO(Patient patient) {
+        this(patient.getId(), patient.getName(), patient.getEmail(), patient.getCellphone(), patient.getCpf(),
+                patient.getPersonalAddress());
+    }
+}

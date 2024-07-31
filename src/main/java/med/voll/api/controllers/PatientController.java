@@ -1,15 +1,20 @@
 package med.voll.api.controllers;
 
 import jakarta.validation.Valid;
+import med.voll.api.dto.patient.PatientDetailDTO;
 import med.voll.api.dto.patient.PatientRecoverDTO;
 import med.voll.api.dto.patient.PatientRegistryDTO;
 import med.voll.api.dto.patient.PatientUpdateDTO;
+import med.voll.api.models.Patient;
 import med.voll.api.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/patients")
@@ -18,28 +23,34 @@ public class PatientController {
     private PatientService patientService;
 
     @PostMapping
-    @Transactional
-    public String registryPatient(@RequestBody @Valid PatientRegistryDTO patientRegistryDTO) {
-        this.patientService.registryPatient(patientRegistryDTO);
-        return "Patient saved";
+    public ResponseEntity<PatientDetailDTO> registryPatient(@RequestBody @Valid PatientRegistryDTO patientRegistryDTO,
+                                                            UriComponentsBuilder uriBuilder) {
+        Patient newPatient = this.patientService.registryPatient(patientRegistryDTO);
+        URI uri = uriBuilder.path("/patients/{id}").buildAndExpand(newPatient.getId()).toUri();
+        return ResponseEntity.created(uri).body(new PatientDetailDTO(newPatient));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PatientDetailDTO> getPatient(@PathVariable Long id) {
+        Patient foundPatient = this.patientService.getPatient(id);
+        return ResponseEntity.ok(new PatientDetailDTO(foundPatient));
     }
 
     @GetMapping
-    public Page<PatientRecoverDTO> getAllPatients(Pageable pagination) {
-        return this.patientService.getAllPatients(pagination);
+    public ResponseEntity<Page<PatientRecoverDTO>> getAllPatients(Pageable pagination) {
+        Page<PatientRecoverDTO> page = this.patientService.getAllPatients(pagination);
+        return ResponseEntity.ok(page);
     }
 
     @PutMapping
-    @Transactional
-    public String updatePatient(@RequestBody @Valid PatientUpdateDTO patientUpdateDTO) {
-        this.patientService.updatePatient(patientUpdateDTO);
-        return "Patient updated";
+    public ResponseEntity<PatientDetailDTO> updatePatient(@RequestBody @Valid PatientUpdateDTO patientUpdateDTO) {
+        Patient updatedPatient = this.patientService.updatePatient(patientUpdateDTO);
+        return ResponseEntity.ok(new PatientDetailDTO(updatedPatient));
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
-    public String deletePatient(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
         this.patientService.deletePatient(id);
-        return "Patient deleted";
+        return ResponseEntity.noContent().build();
     }
 }

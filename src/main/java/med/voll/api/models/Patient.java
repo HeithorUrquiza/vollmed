@@ -33,6 +33,7 @@ public class Patient {
         this.email = patientRegistryDTO.email();
         this.cellphone = patientRegistryDTO.cellphone();
         this.cpf = patientRegistryDTO.cpf();
+        this.active = true;
         this.personalAddress = new PersonalAddress(patientRegistryDTO.personalAddress());
     }
 

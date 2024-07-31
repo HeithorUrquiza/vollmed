@@ -32,8 +32,8 @@ public class DoctorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDetailDTO> getDoctor(@PathVariable Long id) {
-        Doctor doctorFounded = this.doctorService.getDoctor(id);
-        return ResponseEntity.ok(new DoctorDetailDTO(doctorFounded));
+        Doctor foundDoctor = this.doctorService.getDoctor(id);
+        return ResponseEntity.ok(new DoctorDetailDTO(foundDoctor));
     }
 
     @GetMapping
